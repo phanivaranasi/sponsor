@@ -1,0 +1,11 @@
+FROM node:alpine as react-webpack-app
+WORKDIR /rcw
+COPY package.json /rcw
+RUN npm install
+#COPY . /app
+CMD ["npm","run","build"]
+
+FROM nginx:alpine
+COPY --from=react-webpack-app /rcw/build /usr/share/nginx/html
+EXPOSE 80
+CMD [“nginx”, “-g”, “daemon off;”]
