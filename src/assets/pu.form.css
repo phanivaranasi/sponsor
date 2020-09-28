@@ -1,26 +1,65 @@
-.pu-row{
-    margin-top:2px;
+.pu-row {
+    margin-top: 2px;
 }
-.pu-panel{
-    margin-top:5px;
-    
+
+.pu-panel {
+    margin-top: 5px;
 }
-.pu-input{
-    width:100%;
-    padding:1px !important;
-}
-.pu-calendar-panel{
-    border:solid 1px red;
-}
-.p-calendar{
-    
+
+.pu-input {
     width: 100%;
-    
+    padding: 1px !important;
 }
-.p-inputtext{
-    margin:1px !important;
-    padding:4px !important;
+
+.pu-calendar-panel {
+    border: solid 1px red;
 }
-.p-calendar-w-btn{
-    border:solid 1px red;
+
+.p-calendar {
+    width: 100%;
+}
+
+.p-inputtext {
+    margin: 1px !important;
+    padding: 4px !important;
+}
+
+.p-calendar-w-btn {
+    border: solid 1px red;
+}
+
+.p-card-header {
+    text-align: center;
+    background-color: #0091d5;
+    color: #FFFFFF;
+    font-size: 15px;
+    padding: 4px !important;
+}
+
+.p-toolbar {
+    margin: 2px 0px 8px 0px !important;
+    padding: 5px 3px !important;
+}
+
+.pu-address {
+    word-break: break-all;
+    line-break: loose;
+}
+
+.pu-page {
+    margin-top: 1.2rem;
+}
+
+.pu-page-header {
+    border-bottom: solid 1px #CCD9DD;
+    margin: 0px 0 10px 0px;
+    width: 100% !important;
+}
+
+.pu-page-header h4 {
+    display: inline;
+}
+
+.pu-page-header small {
+    margin-left: 1rem;
 }
