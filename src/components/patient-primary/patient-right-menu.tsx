@@ -1,13 +1,16 @@
 import * as React from 'react';
+import { Card } from 'primereact/card';
 
-class PatientQuickNav extends React.PureComponent{
+class PatientQuickNav extends React.PureComponent {
 
 
 
-    render(){
+    render() {
         return (
             <div>
-                Patient Quick Navigation
+                <Card  header="H3">
+                     
+                </Card>
             </div>
         )
     }

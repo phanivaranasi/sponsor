@@ -49,7 +49,7 @@ export const required = (values: IValues, fieldName: string): string =>
   values[fieldName] === undefined ||
     values[fieldName] === null ||
     values[fieldName] === ""
-    ? "This must be populated" : "";
+    ? "*" : "";
 
 class Form extends React.Component<IFormProps, IFormState> {
   constructor(props: IFormProps) {
@@ -80,7 +80,7 @@ class Form extends React.Component<IFormProps, IFormState> {
   handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     console.log("Handle Submit");
-    
+
     if (this.validateForm()) {
       const submitSuccess: boolean = await this.submitForm();
       this.setState({ submitSuccess });
@@ -137,10 +137,11 @@ class Form extends React.Component<IFormProps, IFormState> {
       <FormContext.Provider value={context}>
         <form onSubmit={this.handleSubmit} noValidate={true}>
           {this.props.render()}
-          <div className="form-group">
-            <button className="btn btn-sm btn-primary" type="submit">
-              Submit
-            </button>
+          <div className="float-right">
+            <div className="form-group">
+              <button className="btn btn-sm btn-primary mt-2" type="submit">Submit</button>
+              <button className="btn btn-sm btn-warning mt-2 ml-2" type="button">Cancel</button>
+            </div>
           </div>
           {submitSuccess && (
             <div className="alert alert-info" role="alert">

@@ -1,0 +1,26 @@
+.pu-row{
+    margin-top:2px;
+}
+.pu-panel{
+    margin-top:5px;
+    
+}
+.pu-input{
+    width:100%;
+    padding:1px !important;
+}
+.pu-calendar-panel{
+    border:solid 1px red;
+}
+.p-calendar{
+    
+    width: 100%;
+    
+}
+.p-inputtext{
+    margin:1px !important;
+    padding:4px !important;
+}
+.p-calendar-w-btn{
+    border:solid 1px red;
+}
