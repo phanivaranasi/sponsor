@@ -4,11 +4,13 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Toolbar, ToolbarProps } from 'primereact/toolbar';
 import PatientQuickNav from './patient-right-menu';
+import { Sidebar } from 'primereact/sidebar';
 import Pageheader from '../../utils/ui.pageheader';
 import { DataTable } from 'primereact/datatable';
 import { OverlayPanel } from 'primereact/overlaypanel';
 import { Column } from 'primereact/column';
-import { inherits } from 'util';
+import PatientInfo from './patient-info';
+
 interface IPatientData {
     code: string;
     name: string;
@@ -25,13 +27,15 @@ class PatientData implements IPatientData {
 }
 interface IPatientList {
     displayNewPopup: boolean;
+    displayDeletePopup: boolean;
     patients: Array<IPatientData>;
     selectedProducts3: any;
-    selectedProducts1: any;
+    visiblePatientInfo: boolean;
+    patientInfo: IPatientData;
 }
 
 interface IProps {
-    patient: Array<PatientData>
+
 }
 
 
@@ -42,9 +46,11 @@ class PatientList extends React.Component<IProps, IPatientList> {
         super(props);
         this.state = {
             displayNewPopup: false,
+            displayDeletePopup: false,
             patients: [],
             selectedProducts3: null,
-            selectedProducts1: null
+            visiblePatientInfo: false,
+            patientInfo: null
         }
         setTimeout(() => {
             this.loadData();
@@ -58,8 +64,28 @@ class PatientList extends React.Component<IProps, IPatientList> {
     showNewPopup = (name: string) => {
         this.setState({ displayNewPopup: true });
     }
+    openPatientInfo = (rowdata: any) => {
+        console.log(">>> Row Data <<<", rowdata);
+        this.setState({ visiblePatientInfo: true, patientInfo: rowdata });
+
+    }
+    hideDeletePopup = () => {
+        this.setState({ displayDeletePopup: false });
+    }
     detailCol = (rowdata: any) => {
-        return <i className="pi pi-ellipsis-h"></i>
+        return <a data-pr-tooltip="Click to view patient info" className="pu-anchor" onClick={() => this.openPatientInfo(rowdata)} ><i className="pi pi-ellipsis-h"></i></a>
+    }
+    deletePatient = () => {
+        console.log(this.state.selectedProducts3);
+        this.setState({ displayDeletePopup: true });
+    }
+    renderFooter(){
+        return (
+            <div>
+                <Button label="No" icon="pi pi-times" onClick={this.hideDeletePopup} className="p-button-text" />
+                <Button label="Yes" icon="pi pi-check" onClick={this.hideDeletePopup} autoFocus />
+            </div>
+        );
     }
     loadData() {
         let p1: Array<PatientData> = [];
@@ -80,8 +106,11 @@ class PatientList extends React.Component<IProps, IPatientList> {
         const leftContent = ({ }: ToolbarProps) => {
             return (
                 <div className="sizes">
-                    <Button onClick={() => this.showNewPopup('displayNewPopup')} label="New" iconPos="right" icon="pi pi-plus" className="mr-2 p-button-sm p-button-raised p-button-success" />
-                    <Button label="Delete" iconPos="right" icon="pi pi-trash" className="p-button-sm p-button-raised p-button-danger" />
+                    <Button onClick={() => this.showNewPopup('displayNewPopup')} label="New" iconPos="right" icon="pi pi-user-plus" className="mr-2 p-button-sm p-button-raised p-button-success" />
+                    <Button onClick={this.deletePatient} label="Update" iconPos="right" icon="pi pi-user-edit" className="mr-2 p-button-sm p-button-raised p-button-secondary" />
+                    <Button onClick={this.deletePatient} label="Delete" iconPos="right" icon="pi pi-user-minus" className="mr-2 p-button-sm p-button-raised p-button-danger" />
+                    <Button disabled={this.state.selectedProducts3 == null || (this.state.selectedProducts3.legth <= 0)} label="Reset" iconPos="right" icon="pi pi-replay" className="p-button-sm p-button-raised p-button-warning" />
+
                 </div>
             )
         }
@@ -96,7 +125,6 @@ class PatientList extends React.Component<IProps, IPatientList> {
                 </div>
                 <div className="col-lg-10">
                     <DataTable
-                       
                         dataKey="code"
                         selection={this.state.selectedProducts3}
                         onSelectionChange={e => this.setState({ selectedProducts3: e.value })}
@@ -120,6 +148,16 @@ class PatientList extends React.Component<IProps, IPatientList> {
                 <OverlayPanel>
 
                 </OverlayPanel>
+                <Sidebar visible={this.state.visiblePatientInfo} baseZIndex={1000000} onHide={() => this.setState({ visiblePatientInfo: false })}>
+                    <PatientInfo data={this.state.patientInfo} ></PatientInfo>
+                </Sidebar>
+              
+                <Dialog header="Confirmation" visible={this.state.displayDeletePopup} modal style={{ width: '350px' }} footer={this.renderFooter }  onHide={this.hideDeletePopup}>
+                    <div className="confirmation-content">
+                        <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem' }} />
+                        <span>Are you surae you want to proceed?</span>
+                    </div>
+                </Dialog>
             </div >
         )
     }

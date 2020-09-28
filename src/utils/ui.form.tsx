@@ -49,7 +49,7 @@ export const required = (values: IValues, fieldName: string): string =>
   values[fieldName] === undefined ||
     values[fieldName] === null ||
     values[fieldName] === ""
-    ? "*" : "";
+    ? "Please provide" : "";
 
 class Form extends React.Component<IFormProps, IFormState> {
   constructor(props: IFormProps) {

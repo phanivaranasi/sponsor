@@ -63,3 +63,12 @@
 .pu-page-header small {
     margin-left: 1rem;
 }
+.pu-anchor{
+    cursor: pointer;
+}
+
+.confirmation-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
