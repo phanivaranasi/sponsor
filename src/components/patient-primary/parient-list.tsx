@@ -6,6 +6,7 @@ import { Toolbar, ToolbarProps } from 'primereact/toolbar';
 import PatientQuickNav from './patient-right-menu';
 import Pageheader from '../../utils/ui.pageheader';
 import { DataTable } from 'primereact/datatable';
+import { OverlayPanel } from 'primereact/overlaypanel';
 import { Column } from 'primereact/column';
 import { inherits } from 'util';
 interface IPatientData {
@@ -25,6 +26,8 @@ class PatientData implements IPatientData {
 interface IPatientList {
     displayNewPopup: boolean;
     patients: Array<IPatientData>;
+    selectedProducts3: any;
+    selectedProducts1: any;
 }
 
 interface IProps {
@@ -39,11 +42,26 @@ class PatientList extends React.Component<IProps, IPatientList> {
         super(props);
         this.state = {
             displayNewPopup: false,
-            patients: []
+            patients: [],
+            selectedProducts3: null,
+            selectedProducts1: null
         }
+        setTimeout(() => {
+            this.loadData();
+
+        }, 500);
     }
     hideNewPopup = (name: string) => {
         this.setState({ displayNewPopup: false });
+
+    }
+    showNewPopup = (name: string) => {
+        this.setState({ displayNewPopup: true });
+    }
+    detailCol = (rowdata: any) => {
+        return <i className="pi pi-ellipsis-h"></i>
+    }
+    loadData() {
         let p1: Array<PatientData> = [];
         for (var i = 1; i < 10; i++) {
             let patient1 = new PatientData();
@@ -57,12 +75,6 @@ class PatientList extends React.Component<IProps, IPatientList> {
         }
         this.setState({ patients: p1 });
     }
-    showNewPopup = (name: string) => {
-        this.setState({ displayNewPopup: true });
-    }
-    detailCol=(rowdata:any)=>{
-        return <i className="pi pi-cog"></i>
-    }
     render() {
 
         const leftContent = ({ }: ToolbarProps) => {
@@ -73,7 +85,7 @@ class PatientList extends React.Component<IProps, IPatientList> {
                 </div>
             )
         }
-       
+
         return (
             <div className="row pu-page">
                 <div className="col-12 ">
@@ -83,8 +95,14 @@ class PatientList extends React.Component<IProps, IPatientList> {
                     <Toolbar id="appToolbar" left={leftContent} />
                 </div>
                 <div className="col-lg-10">
-                    <DataTable className="p-datatable-sm" value={this.state.patients}>
-                        <Column field="code" header="Code"></Column>
+                    <DataTable
+                       
+                        dataKey="code"
+                        selection={this.state.selectedProducts3}
+                        onSelectionChange={e => this.setState({ selectedProducts3: e.value })}
+                        className="p-datatable-sm"
+                        value={this.state.patients}>
+                        <Column selectionMode="multiple" headerStyle={{ width: '2em' }}></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="gender" header="Gender"></Column>
                         <Column field="age" header="Age"></Column>
@@ -99,6 +117,9 @@ class PatientList extends React.Component<IProps, IPatientList> {
                 <Dialog position="top" header="New Patient" onHide={() => this.hideNewPopup('displayNewPopup')} visible={this.state.displayNewPopup}>
                     <PatientRegistration />
                 </Dialog>
+                <OverlayPanel>
+
+                </OverlayPanel>
             </div >
         )
     }
