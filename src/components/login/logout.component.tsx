@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
 import * as OpenAuthStore from '../store/login';
@@ -7,24 +7,17 @@ import * as OpenAuthStore from '../store/login';
 type LoginProps =
     OpenAuthStore.ILoginState & typeof OpenAuthStore.actionCreators
 
-const RenderBreadcrumb = (props: any) => {
-    if (props.LoggedUser === 'admin') {
-        return <div>BreadCrumb</div>
-    }
-    else
-        return null;
-}
-
-class Breadcrumb extends React.Component<LoginProps> {
-
-    constructor(props: LoginProps) {
+class OpenLogout extends React.Component<LoginProps>
+{
+    constructor(props:LoginProps){
         super(props);
+        this.props.logout();
     }
 
     render() {
         return (
             <div>
-                <RenderBreadcrumb LoggedUser={this.props.userName} />
+               <Redirect to="/login"></Redirect>
             </div>
         )
     }
@@ -32,4 +25,4 @@ class Breadcrumb extends React.Component<LoginProps> {
 
 export default connect(
     (state: ApplicationState) => state.login, OpenAuthStore.actionCreators)
-    (Breadcrumb);
+    (OpenLogout);

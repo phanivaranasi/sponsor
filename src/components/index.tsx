@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router';
-import { App } from "./App";
+import App from "./App";
 import {createBrowserHistory} from 'history';
 import configureStore from './store/configure';
 
@@ -15,7 +15,7 @@ const store = configureStore(history);
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App userName="Beveloper" lang="TypeScript" />
+      <App  />
     </ConnectedRouter>
   </Provider>
   ,

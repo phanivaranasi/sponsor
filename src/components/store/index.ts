@@ -1,8 +1,9 @@
 import * as Counter from "./counter";
-
+import * as OpenAuth from './login';
 // The top-level state object
 export interface ApplicationState {
   counter: Counter.CounterState | undefined;
+  login: OpenAuth.ILoginState | undefined;
 }
 
 // Whenever an action is dispatched, Redux will update each top-level application state property using
@@ -10,6 +11,7 @@ export interface ApplicationState {
 // acts on the corresponding ApplicationState property type.
 export const reducers = {
   counter: Counter.reducer,
+  login: OpenAuth.reducer,
 };
 
 // This type can be used as a hint on action creators so that its 'dispatch' and 'getState' params are

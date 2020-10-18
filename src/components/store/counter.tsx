@@ -15,7 +15,7 @@ export const reducer: Reducer<CounterState> = (state: CounterState | undefined, 
     if (state === undefined) {
         return { count: 0 };
     }
-
+    
     const action = incomingAction as KnownAction;
     switch (action.type) {
         case 'INCREMENT_COUNT':
