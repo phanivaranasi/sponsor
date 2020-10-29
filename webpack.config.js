@@ -8,11 +8,11 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "bundle.js",
-    publicPath:'/'
+    publicPath: '/'
   },
   devServer: {
     port: 9090,
-    historyApiFallback:true
+    historyApiFallback: true
   },
   resolve: {
     extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
@@ -34,9 +34,9 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          'file-loader',
-        ],
+        use: {
+          loader: 'url-loader'
+        },
       },
       {
         test: /\.(woff|woff2|ttf|eot)$/,

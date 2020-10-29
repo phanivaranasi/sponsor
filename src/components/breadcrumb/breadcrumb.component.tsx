@@ -9,7 +9,7 @@ type LoginProps =
 
 const RenderBreadcrumb = (props: any) => {
     if (props.LoggedUser === 'admin') {
-        return <div>BreadCrumb</div>
+        return <div className="bg-light mb-2">BreadCrumb</div>
     }
     else
         return null;

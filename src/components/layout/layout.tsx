@@ -1,10 +1,11 @@
 import * as React from "react";
-
+import CampaignInfo from "../menu/campaignInfo";
 import NavMenu from "../menu/navmenu";
 import Breadcrumb from '../breadcrumb/breadcrumb.component';
 
 export default (props: { children?: React.ReactNode }) => (
-  <div>
+  <div className="container-fluid">
+    <CampaignInfo></CampaignInfo>
     <NavMenu />
     <Breadcrumb />
     {props.children}

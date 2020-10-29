@@ -1,8 +1,6 @@
 import * as React from 'react';
+import { IPatientInfo } from '../../models';
 
-interface IPatientInfo{
-    data:any
-}
 
 class PatientInfo extends React.PureComponent<IPatientInfo>{
     constructor(props:any){
