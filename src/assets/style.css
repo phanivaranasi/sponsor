@@ -20,3 +20,13 @@
     margin:2px;
     display: inline;
 }
+
+.p-steps{
+    width:0px !important;
+}
+.p-steps-title{
+    font-size:12px !important;
+}
+.p-menuitem-link{
+    background: inherit !important;
+}

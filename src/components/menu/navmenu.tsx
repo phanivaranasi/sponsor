@@ -9,49 +9,49 @@ type LoginProps =
     OpenAuthStore.ILoginState & typeof OpenAuthStore.actionCreators
 
 const RenderMenu = (props: any) => {
-    console.warn(props.LoggedUser,props.IsAuthUser)
+    console.warn(props.LoggedUser, props.IsAuthUser)
     if (props.LoggedUser === 'admin')
         return <header>
-        <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" light>
-            <Container>
-                <NavbarBrand tag={Link} to="/dashboard">Patient.UI</NavbarBrand>
-                <NavbarToggler   className="mr-2"/>
-                <Collapse className="d-sm-inline-flex flex-sm-row-reverse"  navbar>
-                    <ul className="navbar-nav flex-grow">
-                        <NavItem>
-                        
-                            <NavLink tag={Link} className="text-dark" to="/dashboard">
-                            <i className="pi pi-home"></i> Dashboard</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink tag={Link} className="text-dark" to="/patient">
-                            <i className="pi pi-user"></i>Patient Registration</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink tag={Link} className="text-dark" to="/fetch-data">
-                            <i className="pi pi-calendar"></i>Schedule Patient</NavLink>
-                        </NavItem>
-                        <NavItem >
-                            <NavLink tag={Link} className="text-dark" to="/fetch-data">
-                            <i className="pi pi-question-circle"></i>
+            <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" light>
+                <Container>
+                    <NavbarBrand tag={Link} to="/dashboard">Patient.UI</NavbarBrand>
+                    <NavbarToggler className="mr-2" />
+                    <Collapse className="d-sm-inline-flex flex-sm-row-reverse" navbar>
+                        <ul className="navbar-nav flex-grow">
+                            <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/dashboard">
+                                    <i className="pi pi-home"></i> Dashboard</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/patient">
+                                    <i className="pi pi-user"></i>Patient Registration</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/schedule">
+                                    <i className="pi pi-calendar"></i>Schedule Patient</NavLink>
+                            </NavItem>
+                            <NavItem >
+                                <NavLink tag={Link} className="text-dark" to="/fetch-data">
+                                    <i className="pi pi-question-circle"></i>
                             Support
                             </NavLink>
-                        </NavItem>
-                        <NavItem >
-                            <NavLink tag={Link} className="text-dark" to="/logout">
-                            <i className="pi pi-power-off"></i>Logout
-                           
+                            </NavItem>
+                            <NavItem >
+                                <NavLink tag={Link} className="text-dark" to="/logout">
+                                    <i className="pi pi-power-off"></i>Logout
+
                             </NavLink>
-                        </NavItem>
-                    </ul>
-                </Collapse>
-            </Container>
-        </Navbar>
-    </header>
+                            </NavItem>
+                        </ul>
+                    </Collapse>
+                </Container>
+            </Navbar>
+        </header>
+
     else
         return null;
 }
- 
+
 class NavMenu extends React.PureComponent<LoginProps, { isOpen: boolean }> {
     constructor(props: LoginProps) {
         super(props);

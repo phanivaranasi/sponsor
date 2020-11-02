@@ -5,6 +5,7 @@ import Logout from "../components/login/logout.component";
 import OpenLogin from "../components/login/login.component";
 import PatientList from "../components/patient-primary/parient-list";
 import OpenDashboard from "../components/dashboard/dashboard.component";
+import PatientSchedule from "../components/patient-primary/patient-schedule";
 import GuardedRoute from '../utils/ui.secure';
 import { Store } from "redux";
 import { connect } from 'react-redux';
@@ -32,6 +33,7 @@ class App extends React.PureComponent<LoginProps, {}>{
         <Layout>
           <GuardedRoute isAuthenticated={isAuthUser} exact path="/dashboard" component={OpenDashboard} />
           <GuardedRoute isAuthenticated={isAuthUser} path="/patient" component={PatientList} />
+          <GuardedRoute isAuthenticated={isAuthUser} path='/schedule' component={PatientSchedule} />
           <GuardedRoute isAuthenticated={isAuthUser} path="/logout" component={Logout} />
           <Route path="/login" exact component={OpenLogin} />
           <Route path="/" exact component={OpenLogin} />

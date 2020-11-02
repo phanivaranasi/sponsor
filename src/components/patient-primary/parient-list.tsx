@@ -11,6 +11,7 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 import { Column } from 'primereact/column';
 import PatientInfo from './patient-info';
 import { SplitButton } from 'primereact/splitbutton';
+import { Steps } from 'primereact/steps';
 
 interface IPatientData {
     code: string;
@@ -18,7 +19,8 @@ interface IPatientData {
     gender: string;
     age: number;
     bloodGroup: string;
-    status?:string;
+    status?: string;
+    
 }
 class PatientData implements IPatientData {
     code: string;
@@ -26,17 +28,17 @@ class PatientData implements IPatientData {
     gender: string;
     age: number;
     bloodGroup: string;
-    status:string;
+    status: string;
 }
 interface IPatientList {
     displayNewPopup: boolean;
     displayDeletePopup: boolean;
-    displayCheckupPopup:boolean;
+    displayCheckupPopup: boolean;
     patients: Array<IPatientData>;
     selectedProducts3: any;
     visiblePatientInfo: boolean;
     patientInfo: IPatientData;
- 
+
 }
 
 interface IProps {
@@ -47,13 +49,13 @@ interface IProps {
 
 class PatientList extends React.Component<IProps, IPatientList> {
 
-    item:Array<any>=[];
+    item: Array<any> = [];
     constructor(props: any) {
         super(props);
         this.state = {
             displayNewPopup: false,
             displayDeletePopup: false,
-            displayCheckupPopup:false,
+            displayCheckupPopup: false,
             patients: [],
             selectedProducts3: null,
             visiblePatientInfo: false,
@@ -63,7 +65,7 @@ class PatientList extends React.Component<IProps, IPatientList> {
             this.loadData();
 
         }, 500);
-        this.item=[{label:'Update',icon:'pi pi-refresh'}]
+        this.item = [{ label: 'Update', icon: 'pi pi-refresh' }]
     }
     hideNewPopup = (name: string) => {
         this.setState({ displayNewPopup: false });
@@ -81,20 +83,27 @@ class PatientList extends React.Component<IProps, IPatientList> {
         this.setState({ displayDeletePopup: false });
     }
     detailCol = (rowdata: any) => {
-        return <a data-pr-tooltip="Click to view patient info" className="pu-anchor" onClick={() => this.openPatientInfo(rowdata)} ><i className="pi pi-ellipsis-h"></i></a>
+        return <a data-pr-tooltip="Click to view patient info" className="pu-anchor" onClick={() => this.openPatientInfo(rowdata)} ><i className="pi pi-ellipsis-h"></i></a> 
+    }
+    sharePatientCol = (rowdata:any)=>{
+        return 
     }
     statusCol = (rowdata: any) => {
+        let item = [
+            { 'label': 'General', icon: 'pi pi-plus' }, 
+            { 'label': 'Eye' }, { 'label': 'Blood' }];
 
+        return <Steps model={item} activeIndex={Number(rowdata.status)} />
     }
-    openGeneralCheckupInfo = (rowdata:any)=>{
-        this.setState({displayCheckupPopup:true,patientInfo:rowdata});
+    openGeneralCheckupInfo = (rowdata: any) => {
+        this.setState({ displayCheckupPopup: true, patientInfo: rowdata });
     }
     deletePatient = () => {
         console.log(this.state.selectedProducts3);
         this.setState({ displayDeletePopup: true });
     }
-    checkupPatient=(rowdata:any)=>{
-        this.setState({displayCheckupPopup:true,patientInfo:rowdata});
+    checkupPatient = (rowdata: any) => {
+        this.setState({ displayCheckupPopup: true, patientInfo: rowdata });
         console.log(this.state.selectedProducts3);
     }
     renderFooter() {
@@ -114,7 +123,7 @@ class PatientList extends React.Component<IProps, IPatientList> {
             patient1.code = "Code" + i;
             patient1.gender = "M";
             patient1.name = "Name" + i.toString();
-            patient1.status = ""
+            patient1.status = (i%2).toString();
             console.log(patient1);
             p1.push(patient1);
         }
@@ -157,7 +166,7 @@ class PatientList extends React.Component<IProps, IPatientList> {
         }
 
         return (
-            <div className="row pu-page">
+            <div className="row shadow-sm bg-whilte rounded pu-page">
                 <div className="col-12 ">
                     <Pageheader pageTitle="Patient" pageSubTitle="Register Patient" pageIcon="" />
                 </div>
@@ -201,7 +210,7 @@ class PatientList extends React.Component<IProps, IPatientList> {
                     </div>
                 </Dialog>
 
-                <Dialog position="top" visible={this.state.displayCheckupPopup} header="General Checkup" baseZIndex={1000000} onHide={()=>this.setState({displayCheckupPopup:false})}>
+                <Dialog position="top" visible={this.state.displayCheckupPopup} header="General Checkup" baseZIndex={1000000} onHide={() => this.setState({ displayCheckupPopup: false })}>
 
                 </Dialog>
 

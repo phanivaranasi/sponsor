@@ -5,9 +5,8 @@ import Breadcrumb from '../breadcrumb/breadcrumb.component';
 
 export default (props: { children?: React.ReactNode }) => (
   <div className="container-fluid">
-    <CampaignInfo></CampaignInfo>
+    <CampaignInfo />
     <NavMenu />
-    <Breadcrumb />
     {props.children}
   </div>
 );
